@@ -11,6 +11,311 @@
 */
 
 .page {
+  margin: 0 auto;
+  font-family: var(--main-font, 'Inter-Variable'), Arial, sans-serif;
+  font-size: var(--main-font-size, 18px);
+  background-image: var(--bg-pattern);
+  background-size: cover;
+  background-attachment: fixed;
   min-inline-size: 320px;
   min-block-size: 100dvb;
+  font-variation-settings: 'wght' var(--main-font-normal-weight, 400);
+  inline-size: var(--content-width, clamp(375px, calc(700 / 1440 * 100vw), 700px));
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-block-start: 100px;
+  border: solid 2px var(--accent-color, #000);
+  padding-block: clamp(120px, 117.1831px + 0.7512vw, 128px);
+  font-family: var(--accent-font, 'Press Start 2P'), sans-serif;
+  text-transform: uppercase;
+  background-color: var(--main-color, #fff);
+}
+
+.header__logo {
+  display: block;
+  font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
+  line-height: 100%;
+  text-decoration: none;
+}
+
+.header__text {
+  font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
+  line-height: 100%;
+}
+
+.main {
+  padding-block-start: 100px;
+}
+
+.card {
+  background-color: var(--main-color, #fff);
+}
+
+.card:not(:first-of-type) {
+  margin-block-start: 50px;
+}
+
+.card__title {
+  padding: 4px 26px 5px 10px;
+  vertical-align: middle;
+  font-size: var(--main-font-size, 18px);
+  line-height: 22px;
+  letter-spacing: normal;
+  font-variation-settings: 'wght' var(--main-font-bold-weight, 700);
+}
+
+.card__figure {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.card__figure-image {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.card_watermark {
+  position: absolute;
+  top: 23px;
+  right: clamp(11px, 6.7746px + 1.1268vw, 23px);
+  opacity: 0.5;
+  color: var(--accent-color, #000);
+  font-family: var(--accent-font, 'Press Start 2P'), sans-serif;
+  font-weight: var(--accent-font-normal-weight);
+  font-size: 14px;
+  line-height: 100%;
+  text-shadow:
+    -1px 0 var(--image-lable-stroke-color),
+    0 1px var(--image-lable-stroke-color),
+    1px 0 var(--image-lable-stroke-color),
+    0 -1px var(--image-lable-stroke-color);
+  mix-blend-mode: hard-light;
+}
+
+@supports((text-stroke: 1px var(--image-lable-stroke-color)) or (-webkit-text-stroke: 1px var(--image-lable-stroke-color))) {
+  .card_watermark {
+    text-shadow: none;
+    -webkit-text-stroke: 1px var(--image-lable-stroke-color);
+    text-stroke: 1px var(--image-lable-stroke-color);
+  }
+} 
+
+.card__content {
+  padding: 25px;
+  line-height: calc(21 / 18 * 100%);
+}
+
+.card__content-text:not(:first-of-type) {
+  padding-block-start: 27px;
+}
+
+.card__footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  gap: 7px;
+  padding-block-start: 25px;
+}
+
+.card__icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 0;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  background: none;
+  transition: outline-color 0.3s ease;
+  cursor: pointer;
+  block-size: 34px;
+  inline-size: 34px;
+}
+
+.card__icon-button:focus-visible {
+  outline-color: var(--accent-color, #000);
+}
+
+.bordered-block {
+  border: solid 2px var(--accent-color, #000);
+  border-block-start: none;
+}
+
+.bordered-block:first-child {
+  border-block-start: solid 2px var(--accent-color, #000);
+}
+
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 2px var(--accent-color, #000);
+  background: none;
+  background-color: var(--main-color, #fff);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  box-shadow: 2px 2px 0px 0px var(--accent-color, #000);
+  outline: none;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent-color, #000);
+  transition: transform 0.5s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+.button__text {
+  color: var(--main-color, #fff);
+  font-family: var(--accent-font, 'Press Start 2P'), sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  mix-blend-mode: difference;
+}
+
+.card__like-button {
+  inline-size: 130px;
+  block-size: 38px;
+}
+
+.like-icon {
+  display: block;
+  flex-shrink: 0;
+  inline-size: 39px;
+  block-size: 36px;
+}
+
+.filter-grayscale {
+  filter: grayscale(40%);
+}
+
+.filter-hue-rotate {
+  filter: hue-rotate(10%);
+}
+
+.filter-saturate {
+  filter: saturate(200%);
+}
+
+.filter-brightness {
+  filter: brightness(70%);;
+}
+
+.filter-blur {
+  filter: blur(1px);
+}
+
+.filter-sepia {
+  filter: sepia(80%);
+}
+
+.filter-multiple {
+  filter: saturate(90%) hue-rotate(0.1turn);
+}
+
+.save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block-start: 50px;
+  padding-block-end: 100px;
+}
+
+.save__button {
+  gap: 8px;
+  padding: 15px 20px;
+}
+
+.save__button-floppy-icon {
+  display: block;
+  width: 21px;
+  height: 21px;
+  color: var(--main-color, #fff);
+  mix-blend-mode: difference;
+}
+
+.dialog-save {
+  flex-direction: column;
+  align-items: center;
+  padding-inline: clamp(30px, 46.2254px + -1.1268vw, 42px);
+  padding-block: 30px;
+  inline-size: 92%;
+  max-inline-size: 357px;
+  min-inline-size: 345px;
+}
+
+.dialog-save[open] {
+  display: flex;
+}
+
+.dialog-save::backdrop {
+  background-color: rgb(0 0 0 / 0.75);
+} 
+
+.dialog-save__icon {
+  display: block;
+  flex-shrink: 0;
+  width: 39px;
+  height: 39px;
+}
+
+.dialog-save__image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  inline-size: 100%;
+}
+
+.dialog-save__text {
+  font-family: var(--accent-font, 'Press Start 2P'), sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  text-transform: uppercase;
+}
+
+.dialog-save__button {
+  margin-block-start: 30px;
+  padding-block: 10px;
+  text-transform: uppercase;
+  inline-size: 100%;
+}
+
+@media (width <= 375px) {
+  .save__button {
+    flex-direction: column;
+  }
+
+  .save__button-floppy-icon {
+    width: 28px;
+    height: 28px;
+  }
 }
